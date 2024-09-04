@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 data "archive_file" "lambda_hello_world" {
   type = "zip"
 
@@ -72,5 +75,3 @@ resource "random_pet" "lambda_function_name" {
    role       = aws_iam_role.lambda_exec.name
    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
  }
-
-

@@ -1,10 +1,13 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 require 'json'
 
 module LambdaFunctions
   class Handler
     def self.process(event:,context:)
       nameQuery = event.dig("queryStringParameters", "name")
-      name = nameQuery || "World"
+      name = nameQuery || "HashiConf!"
 
       {
         statusCode: 200,

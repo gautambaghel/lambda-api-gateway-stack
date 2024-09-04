@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 required_providers {
   aws = {
     source  = "hashicorp/aws"
@@ -20,13 +23,19 @@ required_providers {
   }
 }
 
-provider "aws" "this" {
+provider "aws" "configurations" {
+  for_each = var.regions
+
   config {
-    region = var.region
+    region = each.value
 
     assume_role_with_web_identity {
-      role_arn                = var.role_arn
-      web_identity_token_file = var.identity_token_file
+      role_arn           = var.role_arn
+      web_identity_token = var.identity_token
+    }
+
+    default_tags {
+      tags = var.default_tags
     }
   }
 }
